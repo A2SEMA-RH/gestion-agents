@@ -5,20 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Paie {
+public class CategorieMission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id ;
-    @ManyToOne
-    @JoinColumn(name = "agentId")
-    private Agent  agent ;
-    private Date  date ;
-    private int heursTravail ;
-
+    private Long id ;
+    private  String nom ;
+    private  String description;
+    @OneToMany(mappedBy = "categorieMisssion", fetch = FetchType.EAGER)
+    private List<Mission> mission ;
 
 }
