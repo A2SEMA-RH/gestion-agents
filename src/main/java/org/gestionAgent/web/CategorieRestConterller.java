@@ -5,6 +5,7 @@ import org.gestionAgent.service.CategorieMissionService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/catogirie")
@@ -25,6 +26,11 @@ public class CategorieRestConterller {
     @GetMapping(value = "/liste-categories")
     public List<CategorieMission>listCategorie(){
         return categorieMissionService.listeCategoriesMission();
+    }
+
+    @GetMapping(value =  "/selection-categorie/{id}")
+    public Optional<CategorieMission>selectCategorieMission(@PathVariable Long id){
+        return categorieMissionService.selectCategorieMission(id);
     }
 
 

@@ -2,10 +2,12 @@ package org.gestionAgent.service.impl;
 
 import org.gestionAgent.dao.CategorieMissionDao;
 import org.gestionAgent.entity.CategorieMission;
+import org.gestionAgent.exceptionds.CategorieMissionNotFindException;
 import org.gestionAgent.service.CategorieMissionService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategorieMissionImpl implements CategorieMissionService {
@@ -32,9 +34,9 @@ public class CategorieMissionImpl implements CategorieMissionService {
     }
 
     @Override
-    public CategorieMission selectCategorieMission(Long categorieMissionId) {
+    public Optional<CategorieMission> selectCategorieMission(Long categorieMissionId) {
 
-        return  categorieMissionDao.findById(categorieMissionId).orElse(null);
+        return Optional.ofNullable(categorieMissionDao.findById(categorieMissionId).orElseThrow(() -> new CategorieMissionNotFindException(categorieMissionId)));
     }
 
     @Override
